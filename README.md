@@ -12,14 +12,6 @@ If the code matches a line in the file → plays sounds/yes.mp3.
 
 If not → plays sounds/no.mp3.
 
-## Structure
-project/
-├── gizmo.py
-├── items.txt
-└── sounds/
-    ├── yes.mp3
-    └── no.mp3
-
 ## Notes
 
 Requires pygame.
