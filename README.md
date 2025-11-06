@@ -1,2 +1,2 @@
-# UPC Scanning GIzmo
+# UPC Scanning Gizmo
 
