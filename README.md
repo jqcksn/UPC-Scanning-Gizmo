@@ -14,8 +14,8 @@ If not → plays sounds/no.mp3.
 
 ## Notes
 
-Requires pygame.
+Requires pygame
 
-One item code per line in the .txt file.
+One item code per line in the .txt file
 
-Will warn if no .txt files are found.
+Will warn if no .txt files are found
