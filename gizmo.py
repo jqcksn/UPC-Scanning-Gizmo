@@ -1,11 +1,12 @@
 try:
     import os
-    filepath = os.path.abspath(__file__).replace('gizmo.py', '')
+    filepath = os.path.dirname(os.path.abspath(__file__))
     os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
     import pygame
     for dirfile in os.listdir(filepath):
         if '.txt' in dirfile:
             jerry = open(f"{filepath}{dirfile}", 'r')
+			print(f"Using: {dirfile}")
             break
     try:
         jerry
@@ -23,5 +24,4 @@ try:
         pygame.mixer.music.play()
 except Exception as e:
     print(e)
-    while True:
-        pass
+    input("Press enter to exit:")
