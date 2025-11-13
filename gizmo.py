@@ -1,6 +1,7 @@
 try:
     import os
     from gtts import gTTS
+    import time
     filepath = os.path.dirname(os.path.abspath(__file__))
     os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
     import pygame
@@ -21,18 +22,20 @@ try:
         foundit = False
         for line in lines:
             if upc.lower() in line.lower():
-                pygame.mixer.music.load(f'{filepath}\\sounds\\yes.mp3')
                 nameCond = f"Name: {line.split('\t')[0]}\nCondition: {line.split('\t')[7]}"
-                print(nameCond)
-                readFile = gTTS(nameCond)
-                readFile.save('sounds\\temp.mp3')
-                pygame.mixer.music.load(f'{filepath}\\sounds\\temp.mp3')
-                pygame.mixer.music.play()
                 print(nameCond)
                 foundit = True
         if not foundit:
             pygame.mixer.music.load(f'{filepath}\\sounds\\no.mp3')
             print(f"\033[31mDENIED. ({upc}) thing fucking SUCKS!!!!\033[0m")
+        else:
+                readFile = gTTS(nameCond)
+                readFile.save('sounds\\temp.mp3')
+                pygame.mixer.music.load(f'{filepath}\\sounds\\temp.mp3')
+                pygame.mixer.music.play()
+                while pygame.mixer.music.get_busy():
+                    time.sleep(0.1)
+                pygame.mixer.music.load(f'{filepath}\\sounds\\yes.mp3')
         pygame.mixer.music.play()
 except Exception as e:
     print(e)
