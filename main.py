@@ -32,7 +32,7 @@ while running:
     match command.split(' ')[0]:
         case 'help':
             print(
-                """If you want to search the file for any of the commands, start the query with "iHateCommands"
+                """If you want to search the file for any of the commands, start the query with "^^^"
 
 printcols: prints column names and numbers for settings.
     -c: Clear right before, use if lines are truncated
@@ -64,7 +64,7 @@ settings: accesses settings
         case 'exit':
             running = False
         case _:
-            command.replace('iHateCommands', '').strip()
+            command.replace('^^^', '').strip()
             found = False
             for line in lines:
                 if command.lower() in line.lower():
