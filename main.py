@@ -59,8 +59,8 @@ settings: accesses settings
             with open('files\\settings.json', 'w') as settingfile:
                 adjusting = True
                 while adjusting:
+                    print(settings)
                     setcond = input("What would you ")
-                    settings 
         case 'exit':
             running = False
         case _:
