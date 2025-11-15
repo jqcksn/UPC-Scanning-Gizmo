@@ -1,32 +1,36 @@
 import json
-
 import os
-from gtts import gTTS
-import time
 with open('files\\settings.json', 'r') as settinginit:
     settings = json.load(settinginit)
 print(settings)
+if not settings['Muted']:
+    os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+    import pygame
+    import time
+    if settings['Text to speech']:
+        from gtts import gTTS
 filepath = os.path.dirname(os.path.abspath(__file__))
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-import pygame
 texts = []
 for dirfile in os.listdir(filepath):
     if '.txt' in dirfile:
         texts.append(dirfile)
 if len(texts) > 1:
     print(*map(lambda t: f"{t[0]}: {t[1]}", enumerate(texts)), sep="\n")
-    jerry = open(texts[int(input("Which number text file are you using?: "))], 'r')
+    textfile = open(texts[int(input("Which number text file are you using?: "))], 'r')
 else:
-    jerry = open(texts[0], 'r')
-print(f"Using: {jerry.name}")
-lines = jerry.readlines()
-jerry.close()
+    textfile = open(texts[0], 'r')
+print(f"Using: {textfile.name}")
+lines = textfile.readlines()
+textfile.close()
 
 pygame.mixer.init()
 running = True
 
 while running:
+    allem = False
     command = f'{input("Let me know what you want to let me know: ")}'
+    if ' -c' in command:
+            os.system('cls')
     columns = lines[0].strip().split('\t')
     columns = {k: v for k, v in enumerate(columns)}
     match command.split(' ')[0]:
@@ -34,24 +38,17 @@ while running:
             print(
                 """If you want to search the file for any of the commands, start the query with "^^^"
 
-printcols: prints column names and numbers for settings.
-    -c: Clear right before, use if lines are truncated
+printcols: Prints column names and numbers for settings. Can also be typed after query to print all columns of query
 
-clear: clears console log
+-c: Clear console. Will still run command if combined with another one.
 
 exit: idk what this one does i'm scared
 
 settings: accesses settings
     Text to speech: Toggles text to speech
     Mute: Toggles sounds
-    Columns: Selection of what columns should be printed when an item is found
-        -a: Append
-        -w: Rewrite
-        -r: Until "exit" typed
-            (sorry lmao)""")
+    Columns: Selection of what columns should be printed when an item is found""")
         case 'printcols':
-            if '-c' in command:
-                os.system('cls')
             print(*map(lambda t: f"{t[0]}: {t[1]}", enumerate(columns.values())), sep="\n")
         case 'clear':
             os.system('cls')
@@ -60,18 +57,24 @@ settings: accesses settings
                 adjusting = True
                 while adjusting:
                     print(settings)
-                    setcond = input("What would you ")
+                    setcond = input("What would you like to change?: ")
+
+                        
+                json.dump(settings, settingfile)
         case 'exit':
             running = False
         case _:
-            command.replace('^^^', '').strip()
+            if 'printcols' in command:
+                allem = True
+            command = command.replace('^^^', '').strip().replace('printcols','').strip()
             found = False
             for line in lines:
                 if command.lower() in line.lower():
                     printed = ""
                     for num in range(len(columns)):
-                        if num in settings['Columns']:
+                        if num in settings['Columns'] or allem:
                             printed += f"{columns[num]}: {line.split('\t')[num]}\n"
+                    allem = False
                     print(printed.rstrip())
                     found = True
             if not found:
