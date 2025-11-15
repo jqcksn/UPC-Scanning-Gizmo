@@ -1,1 +1,9 @@
-{"Text to speech": false, "Muted": false, "Columns": [0, 7]}
+{
+    "Text to speech": true,
+    "Sound": true,
+    "Columns": [
+        0,
+        7
+    ],
+    "Max speaking time": 5.0
+}
