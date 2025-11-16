@@ -2,14 +2,13 @@ import json
 import os
 with open('files\\settings.json', 'r') as settinginit:
     settings = json.load(settinginit)
-print(settings)
 filepath = os.path.dirname(os.path.abspath(__file__))
 texts = []
 for dirfile in os.listdir(filepath):
-    if '.txt' in dirfile:
+    if dirfile.endswith('.txt'):
         texts.append(dirfile)
 if len(texts) > 1:
-    print(*map(lambda t: f"{t[0 + 1]}: {t[1]}", enumerate(texts)), sep="\n")
+    print(*map(lambda t: f"{t[0]+1}: {t[1]}", enumerate(texts)), sep="\n")
     textfile = open(texts[int(input("Which number text file are you using?: "))-1], 'r')
 else:
     textfile = open(texts[0], 'r')
@@ -107,10 +106,13 @@ settings: accesses settings
                             printed += f"{columns[num]}: {line.split('\t')[num]}\n"
                     print(printed.rstrip())
                     found = True
+
             allem = False
             if not found:
                 if settings['Sound']:
+                    os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
                     import pygame
+                    pygame.mixer.init()
                     pygame.mixer.music.load(f'{filepath}\\files\\sounds\\no.mp3')
                 print(f"\033[31m({command}) not found in file\033[0m")
             else:
@@ -121,6 +123,8 @@ settings: accesses settings
                     pygame.mixer.init()
                     if settings['Text to speech']:
                         from gtts import gTTS
+                        if not printed:
+                            printed = "fuck you"
                         readFile = gTTS(printed)
                         readFile.save('files\\sounds\\temp.mp3')
                         pygame.mixer.music.load(f'{filepath}\\files\\sounds\\temp.mp3')
