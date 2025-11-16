@@ -105,13 +105,12 @@ settings: accesses settings
                             printed += f"{columns[num]}: {line.split('\t')[num]}\n"
                     print(printed.rstrip())
                     found = True
-
             allem = False
             if not found:
                 if settings['Sound']:
                     os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
                     import pygame
-                    if initted:
+                    if not initted:
                         initted = True
                         pygame.mixer.init()
                     pygame.mixer.music.load(f'{filepath}\\files\\sounds\\no.mp3')
