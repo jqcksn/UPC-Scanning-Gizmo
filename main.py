@@ -16,13 +16,12 @@ print(f"Using: {textfile.name}")
 lines = textfile.readlines()
 textfile.close()
 running = True
+columns = lines[0].strip().split('\t')
 while running:
     allem = False
     command = f'{input("Let me know what you want to let me know: ")}'
     if ' -c' in command:
             os.system('cls')
-    columns = lines[0].strip().split('\t')
-    columns = {k: v for k, v in enumerate(columns)}
     match command.split(' ')[0]:
         case 'help':
             print(
@@ -46,7 +45,7 @@ settings: accesses settings
         rewrite: deletes all columns except for ones input
         add: adds numbers to printed columns""")
         case 'printcols':
-            print(*map(lambda t: f"{t[0]}: {t[1]}", enumerate(columns.values())), sep="\n")
+            print(*map(lambda t: f"{t[0]}: {t[1]}", enumerate(columns)), sep="\n")
         case 'clear':
             os.system('cls')
         case 'settings':
@@ -72,7 +71,7 @@ settings: accesses settings
                         settings['Sound'] = not settings['Sound']
                         print(f"Sound is now {'on' if settings['Sound'] else 'off'}")
                     case '3':
-                        print(*map(lambda t: f"{t[0]}: {t[1]}", enumerate(columns.values())), sep="\n")
+                        print(*map(lambda t: f"{t[0]}: {t[1]}", enumerate(columns)), sep="\n")
                         settingCommand = input("Type your action (add/remove/rewrite) and column number(s): ")
                         settingCommand = settingCommand.split()
                         settingCommand = [int(col) if ind > 0 else col for ind, col in enumerate(settingCommand)]
@@ -112,7 +111,9 @@ settings: accesses settings
                 if settings['Sound']:
                     os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
                     import pygame
-                    pygame.mixer.init()
+                    if initted:
+                        initted = True
+                        pygame.mixer.init()
                     pygame.mixer.music.load(f'{filepath}\\files\\sounds\\no.mp3')
                 print(f"\033[31m({command}) not found in file\033[0m")
             else:
