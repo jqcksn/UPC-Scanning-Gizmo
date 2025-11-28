@@ -19,7 +19,7 @@ running = True
 columns = lines[0].strip().split('\t')
 while running:
     allem = False
-    command = f'{input("Input: ")}'
+    command = f'{input("Let me know what you want to let me know: ")}'
     if ' -c' in command:
             os.system('cls')
     match command.split(' ')[0]:
