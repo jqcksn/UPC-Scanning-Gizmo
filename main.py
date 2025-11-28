@@ -17,6 +17,7 @@ lines = textfile.readlines()
 textfile.close()
 running = True
 columns = lines[0].strip().split('\t')
+initted = False
 while running:
     allem = False
     command = f'{input("Let me know what you want to let me know: ")}'
