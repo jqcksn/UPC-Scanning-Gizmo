@@ -2,7 +2,10 @@
     "Text to speech": true,
     "Sound": true,
     "Columns": [
-        0
+        0,
+        2,
+        3,
+        5
     ],
     "Max speaking time": "10000.0"
 }
