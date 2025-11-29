@@ -183,3 +183,5 @@ cython_debug/
 #Custom
 *.txt
 files/sounds/temp.mp3
+files/sounds/temp.mp3
+files/settings.json
