@@ -1,7 +1,18 @@
 import json
 import os
-with open('files\\settings.json', 'r') as settinginit:
-    settings = json.load(settinginit)
+try:
+    with open('files\\settings.json', 'r') as settinginit:
+        settings = json.load(settinginit)
+except:
+    with open('files\\settings.json', 'w') as settinginit:
+        settinginit.write("""{
+    "Text to speech": true,
+    "Sound": true,
+    "Columns": [
+        0
+    ],
+    "Max speaking time": "10000.0"
+}""")
 filepath = os.path.dirname(os.path.abspath(__file__))
 texts = []
 for dirfile in os.listdir(filepath):
