@@ -6,8 +6,8 @@ try:
 except:
     with open('files\\settings.json', 'w') as settinginit:
         settinginit.write("""{
-    "Text to speech": true,
-    "Sound": true,
+    "Text to speech": false,
+    "Sound": false,
     "Columns": [
         0
     ],
