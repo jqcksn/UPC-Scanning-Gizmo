@@ -5,15 +5,17 @@ try:
         settings = json.load(settinginit)
 except:
     with open('files\\settings.json', 'w') as settinginit:
-        settinginit.write("""{
-    "Text to speech": false,
-    "Sound": false,
+        defaults = """{
+    "Text to speech": true,
+    "Sound": true,
     "Columns": [
-        0
+        0,
+        7
     ],
     "Max speaking time": "10000.0"
-}""")
-        json.loads("""{"Text to speech": true,"Sound": true,"Columns": [0],"Max speaking time": "10000.0"}""")
+}"""
+        settinginit.write(defaults)
+        settings = json.loads(defaults)
 filepath = os.path.dirname(os.path.abspath(__file__))
 texts = []
 for dirfile in os.listdir(filepath):
