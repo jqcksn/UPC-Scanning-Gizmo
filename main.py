@@ -13,6 +13,7 @@ except:
     ],
     "Max speaking time": "10000.0"
 }""")
+        json.load("""{"Text to speech": false,"Sound": false,"Columns": [0],"Max speaking time": "10000.0"}""")
 filepath = os.path.dirname(os.path.abspath(__file__))
 texts = []
 for dirfile in os.listdir(filepath):
