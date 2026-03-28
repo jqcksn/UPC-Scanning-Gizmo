@@ -1,4 +1,4 @@
-# Text File Search CLI
+# UPC Scanning Gizmo
 
 A command-line Python utility for searching tab-delimited text files, printing selected columns, and optionally playing success/failure sounds or reading matches aloud with text-to-speech.
 
