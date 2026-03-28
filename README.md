@@ -137,24 +137,6 @@ Used to limit how long the text-to-speech audio is allowed to play.
 - Audio playback depends on the system having a working audio device and compatible `pygame` setup.
 - `gTTS` requires internet access to generate speech.
 
-## Known issues / improvement ideas
-
-- Column counting logic should use `split('\t')` consistently instead of `len(textfile[0])`
-- Some paths should be built with `os.path.join()` or `pathlib.Path`
-- Several `except:` blocks are too broad
-- Some functions depend on the current working directory instead of absolute paths
-- Empty input can crash `optionValidate()`
-- `pygame.mixer.init()` runs at import time, which can fail early on some systems
-
-## Suggested improvements
-
-- Use `pathlib` for paths
-- Add encoding when opening files
-- Validate tab-delimited rows before processing
-- Separate UI, file I/O, and audio logic into smaller modules
-- Add unit tests for parsing and input validation
-- Improve error messages for missing folders/files/audio assets
-
 ## License
 
-Add your preferred license here.
+MIT License
